@@ -1,23 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import {useState}from 'react';
+import Header from './components/Header';
+import Hero from './components/Hero';
+
+
 
 function App() {
+  const [sections, setSections] = useState(
+    [
+      {
+        title: "Home",
+        url:"#Home"
+      },
+      {
+        title: "About",
+        url:"#About"
+      },
+      {
+        title: "Menu",
+        url:"#Menu"
+      },
+      {
+        title: "Reservations",
+        url:"#Reservations"
+      },
+      {
+        title: "Order Online",
+        url:"#OrderOnline"
+      },
+      {
+        title: "Login",
+        url:"#Login"
+      }
+    ]
+  )
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{width:"100vw", height:"100vh"}}>
+      <Header sections={sections}/>
+      <Hero/>
     </div>
   );
 }
