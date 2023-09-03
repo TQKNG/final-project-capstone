@@ -12,7 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-const pages = ["Home", "About", "Menu","Reservations"];
+const pages = ["Home", "About", "Menu","Reservation"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -25,8 +25,16 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
+  const scrollToSection = (sectionId) => {
+    console.log("sectionId",sectionId)
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <AppBar sx={{ bgcolor: "white" }} position="static">
+    <AppBar sx={{ bgcolor: "whitesmoke" }} position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{marginRight:"10px"}}>
@@ -92,8 +100,14 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "#495E57", display: "block" }}
+                onClick={()=>{
+                  scrollToSection(page)
+                }}
+                sx={{ my: 2, color: "#495E57", display: "block",
+                '&:hover': {
+                  textDecoration: 'underline',  
+                }
+               }}
               >
                 {page}
               </Button>

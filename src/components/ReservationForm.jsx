@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { Button, TextField, Container, Typography, Stack } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Container,
+  Typography,
+  Stack,
+  Box,
+} from "@mui/material";
 import DateTimeSelector from "./DateTimePicker";
 
 const ReservationForm = () => {
+  const [isSubmit, setIsSubmit] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -23,6 +31,18 @@ const ReservationForm = () => {
     let tempErrors = {};
     tempErrors.firstName = formData.firstName ? "" : "This field is required.";
     tempErrors.lastName = formData.lastName ? "" : "This field is required.";
+    tempErrors.phone = formData.phone ? "" : "This field is required.";
+    tempErrors.email = formData.email ? "" : "This field is required.";
+    tempErrors.noOfDiner = formData.noOfDiner ? "" : "This field is required.";
+
+    if (formData.phone && !/^[0-9]+$/.test(formData.phone)) {
+      tempErrors.phone = "Phone number should only contain numbers.";
+    }
+  
+    if (formData.email && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)) {
+      tempErrors.email = "Invalid email format.";
+    }
+
     setErrors({
       ...tempErrors,
     });
@@ -33,13 +53,26 @@ const ReservationForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
+      setIsSubmit(true);
       console.log("Form is valid:", formData);
     }
   };
 
   return (
-    <Container maxWidth="lg" sx={{ padding: "10px" }}>
-      <Typography variant="h5">Reservation Form</Typography>
+    // {
+    //   !isSubmit?
+    // }
+    <Container maxWidth="xl" sx={{ padding: "10px" }}>
+      <Typography
+        variant="h5"
+        sx={{
+          fontFamily: "monospace",
+          fontWeight: 700,
+          letterSpacing: ".3rem",
+        }}
+      >
+        Reservation Form
+      </Typography>
       <form onSubmit={handleSubmit} sx={{ height: "400px" }}>
         <TextField
           variant="outlined"
@@ -68,7 +101,10 @@ const ReservationForm = () => {
         <TextField
           variant="outlined"
           label="Phone Number"
-          type="phone"
+          type="tel"
+          inputProps={{
+            pattern: "[0-9]*"
+          }}
           name="phone"
           value={formData.phone}
           onChange={handleChange}
@@ -81,7 +117,7 @@ const ReservationForm = () => {
           variant="outlined"
           label="Email"
           type="email"
-          name="phone"
+          name="email"
           value={formData.email}
           onChange={handleChange}
           error={Boolean(errors.email)}
@@ -89,7 +125,7 @@ const ReservationForm = () => {
           fullWidth
           margin="normal"
         />
-        <Stack direction="row" spacing={2} justifyContent="space-between">
+        <Stack direction="row" spacing={2} justifyContent="space-between" sx={{paddingTop:"20px"}}>
           <TextField
             variant="outlined"
             label="Number of diners"
@@ -104,9 +140,21 @@ const ReservationForm = () => {
           />
           <DateTimeSelector />
         </Stack>
-        <Button sx={{marginTop:"10px"}} type="submit" variant="contained" color="primary">
-          Submit
-        </Button>
+        <Box sx={{ marginTop: "20px", textAlign: "right" }}>
+          <Button
+            onSubmit={handleSubmit}
+            type="submit"
+            variant="outlined"
+            sx={{
+              "&:hover": {
+                backgroundColor: "primary.main",
+                color: "white",
+              },
+            }}
+          >
+            Reserve a table
+          </Button>
+        </Box>
       </form>
     </Container>
   );

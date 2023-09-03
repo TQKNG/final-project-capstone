@@ -7,6 +7,7 @@ import ResponsiveAppBar from "./components/Nav";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import ReservationForm from "./components/ReservationForm";
+import Menu from "./components/Menu";
 
 function App() {
   return (
@@ -14,10 +15,15 @@ function App() {
       <header>
         <ResponsiveAppBar />
       </header>
-      <main>
-        <Hero />
-        <ReservationForm/>
-      </main>
+        <section id="About">
+          <Hero />
+        </section>
+        <section id="Menu">
+          <Menu/>
+        </section>
+        <section id="Reservation">
+          <ReservationForm />
+        </section>
       <footer>
         <Footer/>
       </footer>
