@@ -3,10 +3,10 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { useState } from "react";
 import ResponsiveAppBar from "./components/Nav";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
+import ReservationForm from "./components/ReservationForm";
 
 function App() {
   return (
@@ -15,7 +15,8 @@ function App() {
         <ResponsiveAppBar />
       </header>
       <main>
-        <Hero/>
+        <Hero />
+        <ReservationForm/>
       </main>
       <footer>
         <Footer/>

@@ -12,11 +12,9 @@ export default function Footer() {
         position: 'fixed', // Fixed positioning
         bottom: 0, // Stick to the bottom
         width: '100%', // Full width
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[200]
-            : theme.palette.grey[800],
+        backgroundColor: "whitesmoke",
         p: 6,
+        textAlign:"center",
       }}
       component="footer"
     >

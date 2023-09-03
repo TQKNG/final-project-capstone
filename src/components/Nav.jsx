@@ -12,26 +12,17 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-const pages = ["Home", "About", "Menu","Reservations", "Order Online"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Home", "About", "Menu","Reservations"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = () => {
-    setAnchorElNav();
-  };
-  const handleOpenUserMenu = () => {
-    setAnchorElUser();
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (

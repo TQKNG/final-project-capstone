@@ -3,11 +3,9 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <Container maxWidth="xl" sx={{
-        padding:"10px"
-    }}>
+    <Container maxWidth="lg" sx={{padding:"10px"}}>
       <Grid container spacing={2}>
-        <Grid item md={6}>
+        <Grid item md={6} sx={12}>
           <Box>
             <Typography>Little Lemon</Typography>
             <Typography>Chicago</Typography>
@@ -22,7 +20,7 @@ const Hero = () => {
             <Button>Reserve a table</Button>
           </Box>
         </Grid>
-        <Grid item md={6}>
+        <Grid item md={6} sx={12}>
           <Box sx={{md:"flex"}} flexGrow={1}>
             <img src="/greekSalad.jpg" alt="greek-salad" width="100%
             " />
