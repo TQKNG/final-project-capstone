@@ -6,16 +6,23 @@ import {
   Typography,
   Stack,
   Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import DateTimeSelector from "./DateTimePicker";
+import Confirmation from "./Confirmation";
 
 const ReservationForm = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    phone: null,
+    phone: "",
     email: "",
+    occasion:"",
+    noOfDiner:"",
   });
   const [errors, setErrors] = useState({});
 
@@ -34,12 +41,16 @@ const ReservationForm = () => {
     tempErrors.phone = formData.phone ? "" : "This field is required.";
     tempErrors.email = formData.email ? "" : "This field is required.";
     tempErrors.noOfDiner = formData.noOfDiner ? "" : "This field is required.";
+    tempErrors.noOfDiner = formData.noOfDiner ? "" : "This field is required.";
 
     if (formData.phone && !/^[0-9]+$/.test(formData.phone)) {
       tempErrors.phone = "Phone number should only contain numbers.";
     }
-  
-    if (formData.email && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)) {
+
+    if (
+      formData.email &&
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
+    ) {
       tempErrors.email = "Invalid email format.";
     }
 
@@ -58,10 +69,7 @@ const ReservationForm = () => {
     }
   };
 
-  return (
-    // {
-    //   !isSubmit?
-    // }
+  return !isSubmit ? (
     <Container maxWidth="xl" sx={{ padding: "10px" }}>
       <Typography
         variant="h5"
@@ -103,7 +111,7 @@ const ReservationForm = () => {
           label="Phone Number"
           type="tel"
           inputProps={{
-            pattern: "[0-9]*"
+            pattern: "[0-9]*",
           }}
           name="phone"
           value={formData.phone}
@@ -125,7 +133,26 @@ const ReservationForm = () => {
           fullWidth
           margin="normal"
         />
-        <Stack direction="row" spacing={2} justifyContent="space-between" sx={{paddingTop:"20px"}}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Occasion</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={formData.occasion}
+            label="occasion"
+            name="occasion"
+            onChange={handleChange}
+          >
+            <MenuItem value={"Birthday"}>Birthday</MenuItem>
+            <MenuItem value={"Anniversary"}>Anniversary</MenuItem>
+          </Select>
+        </FormControl>
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="space-between"
+          sx={{ paddingTop: "20px" }}
+        >
           <TextField
             variant="outlined"
             label="Number of diners"
@@ -157,6 +184,8 @@ const ReservationForm = () => {
         </Box>
       </form>
     </Container>
+  ) : (
+    <Confirmation />
   );
 };
 

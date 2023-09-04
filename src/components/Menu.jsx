@@ -32,14 +32,15 @@ const Menu = () => {
           fontFamily: "monospace",
           fontWeight: 700,
           letterSpacing: ".3rem",
+          textAlign: { xs: 'center', sm: 'left' }
         }}
       >
         Our Menu
       </Typography>
-      <Grid container spacing={2} marginTop={1}>
-        {myMenu.map((item) => {
+      <Grid container spacing={2} marginTop={1} justifyContent="center" alignItems="center">
+        {myMenu.map((item, index) => {
           return (
-            <Grid item md={4} sm={12}>
+            <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
               <RecipeReviewCard item={item}/>
             </Grid>
           );
